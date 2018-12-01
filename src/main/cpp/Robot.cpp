@@ -8,6 +8,7 @@
 #include <TimedRobot.h>
 #include <Joystick.h>
 #include <ctre/Phoenix.h>
+#include "Autonomous.h"
 
 /**
  * This sample program shows how to control a motor using a joystick. In the
@@ -20,13 +21,23 @@
 class Robot : public frc::TimedRobot {
  public:
   void TeleopPeriodic() override {
-     m_motor->Set(m_driveMode,1); 
+     m_motor.Set(m_driveMode,1); 
      }
+
+  void AutonomousPeriodic() override {
+    m_auto.AutonomousPeriodic();
+    printf("whatever you want\n");
+  }
+
+  void AutonomousInit() override {
+    printf("words\n");
+    m_auto.AutonomousInit();
+  }
 
  private:
  ControlMode m_driveMode = ControlMode::PercentOutput;
-  frc::Joystick* m_stick = new frc::Joystick(0);
-  TalonSRX* m_motor = new TalonSRX(2);
+  frc::Joystick m_stick = new frc::Joystick(0);
+  Autonomous m_auto = new Autonomous(m_motor);
 };
 
 START_ROBOT_CLASS(Robot)
