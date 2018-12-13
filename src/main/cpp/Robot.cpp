@@ -35,9 +35,10 @@ class Robot : public frc::TimedRobot {
   }
 
  private:
+ TalonSRX m_motor{2};
  ControlMode m_driveMode = ControlMode::PercentOutput;
-  frc::Joystick m_stick = new frc::Joystick(0);
-  Autonomous m_auto = new Autonomous(m_motor);
+//  frc::Joystick m_stick = new frc::Joystick(0);
+  Autonomous m_auto{&m_motor};
 };
 
 START_ROBOT_CLASS(Robot)

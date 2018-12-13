@@ -4,12 +4,12 @@
 class Autonomous {
     int m_state;
     Timer m_timer;
-    TalonSRX m_motor;
+    TalonSRX* m_motor;
     ControlMode m_driveMode;
     
 
     public:
             void AutonomousPeriodic();
             void AutonomousInit();
-            Autonomous(TalonSRX m_motor);
+            Autonomous(TalonSRX* motor);
 };
